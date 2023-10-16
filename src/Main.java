@@ -20,7 +20,8 @@ public class Main {
             System.out.println("\nMenú:");
             System.out.println("1. Generar referencias y archivo");
             System.out.println("2. Calcular el número de fallas de página");
-            System.out.println("3. Salir de la aplicación");
+            System.out.println("2. Calcular el número de fallas de página");
+            System.out.println("4. Salir de la aplicación");
 
             System.out.print("Seleccionar una opción: ");
             int option = 0;
@@ -64,6 +65,21 @@ public class Main {
                     }
                     break;
                 case 3:
+                    try 
+                    {
+                        TableController thread1= new TableController(); 
+                        AgingAlgorithm thread2= new AgingAlgorithm(2); 
+                        //Ejecutar de forma concurrente
+                        thread1.start();
+                        thread2.start();
+                        //Esperar la terminación de ambos threads
+                        thread1.join();
+                        thread2.join();
+
+                    } catch (Exception e) {
+                        System.out.println("Error \n");
+                    }
+                case 4:
                     scanner.close();
                     System.exit(0);
                     break;
@@ -79,11 +95,11 @@ public class Main {
             int matrix2Elements = columnsMatrix1 * columnsMatrix2;
             int numReferences = (columnsMatrix1 * 2 + 1) * rowsMatrix1 * columnsMatrix2;
             float x = (matrix1Elements * intSize) / pageSize;
-            pagesMatrix1 = (int) Math.ceil(x);
+            pagesMatrix1 = (int) Math.ceil(x); //# páginas virtuales para matrix1
             x = (matrix2Elements * intSize) / pageSize;
-            pagesMatrix2 = (int) Math.ceil(x);
+            pagesMatrix2 = (int) Math.ceil(x); //# páginas virtuales para matrix2
             x = (rowsMatrix1 * columnsMatrix2 * intSize) / pageSize;
-            int pagesMatrix3 = (int) Math.ceil(x);
+            int pagesMatrix3 = (int) Math.ceil(x); //# páginas virtuales para matrix3
             int totalPages = pagesMatrix1 + pagesMatrix2 + pagesMatrix3;
 
             writer.write("TP=" + pageSize + "\n");
