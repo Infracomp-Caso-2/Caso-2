@@ -19,6 +19,16 @@ public class TablePages {
     }
     public int getIndex(int numPagina) //Dado una página buscar el marco de página asociado
     {
-        return 0;
+        int num = -1;
+		boolean hallado = false;
+		for(int i = 0; i<this.TP.size() && !hallado; i++)
+		{
+			if(TP.get(i)==numPagina)
+			{
+				num = i;
+				hallado = true;
+			}
+		}
+		return num;
     }
 }
