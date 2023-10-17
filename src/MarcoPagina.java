@@ -30,4 +30,8 @@ public class MarcoPagina {
         return marcos.indexOf(page);
     }
 
+    public void cambiarPagina(Integer posicion, Integer page) {
+        marcos.set(posicion, page);
+    }
+
 }

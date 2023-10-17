@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.IOException;
 import java.io.BufferedWriter;
@@ -62,6 +63,10 @@ public class Main {
                         String file = scanner.next();
                         System.out.println("\nSimulación en proceso...");
                         // Poner el método para simular el comportamiento y calcular las fallas
+                        ArrayList<Integer> referencias = new ArrayList<Integer>();
+                        Modo2 modo2 = new Modo2(file, marcoPagina, referencias);
+                        modo2.start();
+                        modo2.join();
                     } catch (Exception e) {
                         System.out.println("Error, el valor ingresado no es válido.\n");
                         continue;
