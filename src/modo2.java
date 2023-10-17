@@ -3,7 +3,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-public class modo2 extends Thread {
+public class Modo2 extends Thread {
     private AgingAlgorithm agingAlgorithm;
     private MarcoPagina marcoPagina;
 
@@ -13,11 +13,10 @@ public class modo2 extends Thread {
     private ArrayList<Integer> referencias;
     private String nombreArchivo;
     private TablaPaginas tablaPaginas;
+    private Integer totalPages = 0;
 
-    public modo2(String nombreArchivo, AgingAlgorithm agingAlgorithm, MarcoPagina marcoPagina,
-            ArrayList<Integer> referencias) {
+    public Modo2(String nombreArchivo, MarcoPagina marcoPagina, ArrayList<Integer> referencias) {
         this.nombreArchivo = nombreArchivo;
-        this.agingAlgorithm = agingAlgorithm;
         this.marcoPagina = marcoPagina;
         this.referencias = referencias;
     }
@@ -38,6 +37,7 @@ public class modo2 extends Thread {
                 } else if (contadorLineas == 6) {
                     Integer totalPages = Integer.valueOf(line.split("=")[1]);
                     tablaPaginas = new TablaPaginas(totalPages);
+                    agingAlgorithm = new AgingAlgorithm(referencias, totalPages);
                     contadorLineas++;
                 } else {
                     Integer page = Integer.valueOf(line.split(",")[1]);
@@ -68,7 +68,8 @@ public class modo2 extends Thread {
             }
             // Si el marco no tiene espacio entonces se aplica el algoritmo de reemplazo
             else {
-                Integer posicion = agingAlgorithm.posicionCambiar();
+
+                Integer posicion = agingAlgorithm.posicionCambiar(marcoPagina);
                 marcoPagina.cambiarPagina(posicion, page);
                 tablaPaginas.agregarPagina(page, posicion);
             }
