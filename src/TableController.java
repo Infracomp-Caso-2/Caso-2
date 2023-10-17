@@ -15,10 +15,11 @@ public class TableController extends Thread {
     {
         while(estaActivo)
         {
-            // Lógica de actualización de la tabla de páginas y los marcos de página:
-            // - Actualizar la tabla de páginas en función de las referencias generadas.
-            // - Realizar seguimiento de las páginas en memoria real.
-            // - Tomar decisiones de reemplazo de página si es necesario.
+            //leer UNA línea del archivo
+            //Buscar página en la TP
+                //Si no esta, hacer fallo e intercambiar
+                //Si si está, agregar la referencia para que el thread 2 maneje LRU
+            //volver a dormir
 
             //Esperar para proximo ciclo
             try {
