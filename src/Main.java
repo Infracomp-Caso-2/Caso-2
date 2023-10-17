@@ -73,8 +73,8 @@ public class Main {
                         thread1.start();
                         thread2.start();
                         //Esperar la terminación de ambos threads
-                        thread1.join();
-                        thread2.join();
+                        //thread1.join();
+                        //thread2.join();
 
                     } catch (Exception e) {
                         System.out.println("Error \n");
