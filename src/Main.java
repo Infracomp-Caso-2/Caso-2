@@ -5,10 +5,10 @@ import java.io.FileWriter;
 
 public class Main {
 
-    private static final int intSize = 4; //En Bytes
+    private static final int intSize = 4; // En Bytes
     private static int pageSize;
     private static int rowsMatrix1;
-    private static int columnsMatrix1; //Filas matriz 2
+    private static int columnsMatrix1; // Filas matriz 2
     private static int columnsMatrix2;
     private static int pagesMatrix1;
     private static int pagesMatrix2;
@@ -26,22 +26,25 @@ public class Main {
             System.out.print("Seleccionar una opción: ");
             int option = 0;
             try {
-                option = scanner.nextInt();} catch (Exception e) {
-                System.out.println("Error: El número ingresado no es válido.");}
+                option = scanner.nextInt();
+            } catch (Exception e) {
+                System.out.println("Error: El número ingresado no es válido.");
+            }
             switch (option) {
                 case 1:
                     try {
                         System.out.print("Ingrese el tamaño de página en Bytes: ");
-                        //Tamaño de página = TP
+                        // Tamaño de página = TP
                         pageSize = scanner.nextInt();
                         System.out.print("Ingrese el número de filas de la matriz 1: ");
-                        //Filas matriz 1 NF
+                        // Filas matriz 1 NF
                         rowsMatrix1 = scanner.nextInt();
-                        System.out.print("Ingrese el número de columnas de la matriz 1 (este será también el número de filas de la matriz 2): ");
-                        //Columnas matriz 1 NC1
+                        System.out.print(
+                                "Ingrese el número de columnas de la matriz 1 (este será también el número de filas de la matriz 2): ");
+                        // Columnas matriz 1 NC1
                         columnsMatrix1 = scanner.nextInt();
                         System.out.print("Ingrese el número de columnas de la matriz 2: ");
-                        //Columnas matriz 2 NC2
+                        // Columnas matriz 2 NC2
                         columnsMatrix2 = scanner.nextInt();
                         generateReferencesFile();
                         System.out.println("Creando archivo...\n");
@@ -52,14 +55,15 @@ public class Main {
                     }
                     break;
                 case 2:
-                    try{
-                    System.out.println("Ingrese el número de marcos de página: ");
-                    pageFrames = scanner.nextInt();
-                    System.out.print("Ingrese el nombre del archivo de referencias (references.txt): ");
-                    String file = scanner.next();
-                    System.out.println("\nSimulación en proceso...");
-                    //Poner el método para simular el comportamiento y calcular las fallas
-                    } catch (Exception e){
+                    try {
+                        System.out.println("Ingrese el número de marcos de página: ");
+                        pageFrames = scanner.nextInt();
+                        MarcoPagina marcoPagina = new MarcoPagina(pageFrames);
+                        System.out.print("Ingrese el nombre del archivo de referencias (references.txt): ");
+                        String file = scanner.next();
+                        System.out.println("\nSimulación en proceso...");
+                        // Poner el método para simular el comportamiento y calcular las fallas
+                    } catch (Exception e) {
                         System.out.println("Error, el valor ingresado no es válido.\n");
                         continue;
                     }
@@ -86,7 +90,8 @@ public class Main {
                 default:
                     System.out.println("Error, seleccione una opción válida.");
                     break;
-                }}
+            }
+        }
     }
 
     private static void generateReferencesFile() {
@@ -116,21 +121,23 @@ public class Main {
     }
 
     public static int[] virtualPage(int matrix, int row, int column) {
-        int[] result = new int[2]; //[0] = número página virtual [1] = desplazamiento
+        int[] result = new int[2]; // [0] = número página virtual [1] = desplazamiento
         float x = 0;
         if (matrix == 1) {
             x = (row * columnsMatrix1 * intSize + intSize * column) / pageSize;
             result[0] = (int) Math.ceil(x);
-            result[1] = row * columnsMatrix1 * intSize + intSize * column - result[0] * pageSize;} 
-        else if (matrix == 2) {
+            result[1] = row * columnsMatrix1 * intSize + intSize * column - result[0] * pageSize;
+        } else if (matrix == 2) {
             x = (row * columnsMatrix2 * intSize + intSize * column) / pageSize;
             result[0] = pagesMatrix1 + (int) Math.ceil(x);
-            result[1] = pagesMatrix1 * pageSize + row * columnsMatrix2 * intSize + intSize * column - result[0] * pageSize;} 
-        else {
+            result[1] = pagesMatrix1 * pageSize + row * columnsMatrix2 * intSize + intSize * column
+                    - result[0] * pageSize;
+        } else {
             x = (row * columnsMatrix2 * intSize + intSize * column) / pageSize;
             result[0] = (int) Math.ceil(x);
             result[1] = row * columnsMatrix2 * intSize + intSize * column - result[0] * pageSize;
-            result[0] += (pagesMatrix1 + pagesMatrix2);}
+            result[0] += (pagesMatrix1 + pagesMatrix2);
+        }
         return result;
     }
 
@@ -146,7 +153,7 @@ public class Main {
                 }
                 result = virtualPage(3, i, j);
                 writer.write("[C-" + i + "-" + j + "]," + result[0] + "," + result[1] + "\n");
-            }}
+            }
+        }
     }
 }
-
