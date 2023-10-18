@@ -3,7 +3,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-public class modo2 extends Thread {
+public class Modo2 extends Thread {
     private AgingAlgorithm agingAlgorithm;
     private MarcoPagina marcoPagina;
 
@@ -15,7 +15,7 @@ public class modo2 extends Thread {
     private TablaPaginas tablaPaginas;
     private Integer totalPages = 0;
 
-    public modo2(String nombreArchivo, MarcoPagina marcoPagina, ArrayList<Integer> referencias) {
+    public Modo2(String nombreArchivo, MarcoPagina marcoPagina, ArrayList<Integer> referencias) {
         this.nombreArchivo = nombreArchivo;
         this.marcoPagina = marcoPagina;
         this.referencias = referencias;

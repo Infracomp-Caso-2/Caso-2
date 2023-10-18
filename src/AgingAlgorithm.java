@@ -1,8 +1,7 @@
 import java.util.ArrayList;
-//import java.util.HashMap;
 
 //Thread encargado de ejecutar el algoritmo de envejecimiento cada 1 milisegundo.
-/* 
+
 public class AgingAlgorithm extends Thread{
     private int marcosPagina; 
     private int numReferences; //llamados a la página 
@@ -98,7 +97,11 @@ public class AgingAlgorithm extends Thread{
             try {
                 sleep(1); 
             } catch (Exception e) {}
-*/
+        }
+    }
+}
+
+/*
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
@@ -198,3 +201,5 @@ public class AgingAlgorithm extends Thread {
         }
     }
 }
+
+*/
