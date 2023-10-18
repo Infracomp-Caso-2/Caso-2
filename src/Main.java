@@ -102,6 +102,10 @@ public class Main {
             int pagesMatrix3 = (int) Math.ceil(x); //# páginas virtuales para matrix3
             int totalPages = pagesMatrix1 + pagesMatrix2 + pagesMatrix3;
 
+            if (totalPages == 0) {
+                totalPages = 1;
+            }
+
             writer.write("TP=" + pageSize + "\n");
             writer.write("NF=" + rowsMatrix1 + "\n");
             writer.write("NC1=" + columnsMatrix1 + "\n");
