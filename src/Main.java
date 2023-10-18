@@ -51,18 +51,34 @@ public class Main {
                     }
                     break;
                 case 2:
-                    try{
-                    System.out.println("Ingrese el número de marcos de página: ");
-                    pageFrames = scanner.nextInt();
-                    System.out.print("Ingrese el nombre del archivo de referencias (references.txt): ");
-                    String file = scanner.next();
-                    System.out.println("\nSimulación en proceso...");
-                    //Poner el método para simular el comportamiento y calcular las fallas
-                    } catch (Exception e){
+                    try {
+                        System.out.println("Ingrese el número de marcos de página: ");
+                        pageFrames = scanner.nextInt();
+                        //MarcoPagina marcoPagina = new MarcoPagina(pageFrames);
+                        System.out.print("Ingrese el nombre del archivo de referencias (references.txt): ");
+                        String file = scanner.next();
+                        System.out.println("\nSimulación en proceso...");
+                        
+                        //Crear estructuras necesarias
+                        AgesList ages = new AgesList(pageFrames);//Asignar edades en 0´s
+                        References references = new References(pageFrames);//Asignar bit referencia en 0
+                        TablaPaginas tablePages = new TablaPaginas(pageFrames);
+
+                        // Poner el método para simular el comportamiento y calcular las fallas
+                        AgingAlgorithm envejecimiento = new AgingAlgorithm(references.getReferences(), ages.getAges());
+                        TableController controller = new TableController(file,pageFrames,tablePages,ages,references,envejecimiento);
+
+                        envejecimiento.start();
+                        controller.start();
+                        
+                        envejecimiento.join();
+                        controller.join();
+                        break;
+
+                    } catch (Exception e) {
                         System.out.println("Error, el valor ingresado no es válido.\n");
                         continue;
                     }
-                    break;
                 case 3:
                     scanner.close();
                     System.exit(0);
@@ -79,11 +95,11 @@ public class Main {
             int matrix2Elements = columnsMatrix1 * columnsMatrix2;
             int numReferences = (columnsMatrix1 * 2 + 1) * rowsMatrix1 * columnsMatrix2;
             float x = (matrix1Elements * intSize) / pageSize;
-            pagesMatrix1 = (int) Math.ceil(x);
+            pagesMatrix1 = (int) Math.ceil(x); //# páginas virtuales para matrix1
             x = (matrix2Elements * intSize) / pageSize;
-            pagesMatrix2 = (int) Math.ceil(x);
+            pagesMatrix2 = (int) Math.ceil(x); //# páginas virtuales para matrix2
             x = (rowsMatrix1 * columnsMatrix2 * intSize) / pageSize;
-            int pagesMatrix3 = (int) Math.ceil(x);
+            int pagesMatrix3 = (int) Math.ceil(x); //# páginas virtuales para matrix3
             int totalPages = pagesMatrix1 + pagesMatrix2 + pagesMatrix3;
 
             writer.write("TP=" + pageSize + "\n");
