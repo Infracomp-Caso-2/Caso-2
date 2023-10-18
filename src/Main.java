@@ -130,6 +130,5 @@ public class Main {
                 }
                 result = virtualPage(3, i, j);
                 writer.write("[C-" + i + "-" + j + "]," + result[0] + "," + result[1] + "\n");
-            }}
-    }
+            }}}
 }
