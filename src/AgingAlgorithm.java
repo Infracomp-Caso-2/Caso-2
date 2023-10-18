@@ -12,6 +12,8 @@ public class AgingAlgorithm extends Thread{
     {
         this.estaActivo=true;
         this.numReferences=0;
+        this.references=references;
+        this.ages=ages;
     }
     public void finish()
     {
@@ -34,11 +36,10 @@ public class AgingAlgorithm extends Thread{
                 char[] caracteres = edad.toCharArray();
                 char[] nuevoArreglo = new char[caracteres.length - 1];
     
-                for (int j = 0; i < nuevoArreglo.length; j++) {
+                for (int j = 0; j < nuevoArreglo.length; j++) {
                     nuevoArreglo[j] = caracteres[j];
                 }
                 edad = new String(nuevoArreglo);//0x29
-
                 //actualizar edad
                 this.ages.set(i, bitReferencia+edad); // 1/0 + 0x29
             }
@@ -56,7 +57,10 @@ public class AgingAlgorithm extends Thread{
             //simular pulso de reloj
             try {
                 sleep(1); 
-            } catch (Exception e) {}
+            } catch (Exception e) 
+            {
+                e.printStackTrace();
+            }
         }
     }
 }
