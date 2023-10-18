@@ -21,8 +21,7 @@ public class Main {
             System.out.println("\nMenú:");
             System.out.println("1. Generar referencias y archivo");
             System.out.println("2. Calcular el número de fallas de página");
-            System.out.println("2. Calcular el número de fallas de página");
-            System.out.println("4. Salir de la aplicación");
+            System.out.println("3. Salir de la aplicación");
 
             System.out.print("Seleccionar una opción: ");
             int option = 0;
@@ -59,36 +58,32 @@ public class Main {
                     try {
                         System.out.println("Ingrese el número de marcos de página: ");
                         pageFrames = scanner.nextInt();
-                        MarcoPagina marcoPagina = new MarcoPagina(pageFrames);
+                        //MarcoPagina marcoPagina = new MarcoPagina(pageFrames);
                         System.out.print("Ingrese el nombre del archivo de referencias (references.txt): ");
                         String file = scanner.next();
                         System.out.println("\nSimulación en proceso...");
+                        
+                        //Crear estructuras necesarias
+                        AgesList ages = new AgesList(pageFrames);//Asignar edades en 0´s
+                        References references = new References(pageFrames);//Asignar bit referencia en 0
+                        TablaPaginas tablePages = new TablaPaginas(pageFrames);
+
                         // Poner el método para simular el comportamiento y calcular las fallas
-                        ArrayList<Integer> referencias = new ArrayList<Integer>();
-                        Modo2 modo2 = new Modo2(file, marcoPagina, referencias);
-                        modo2.start();
-                        modo2.join();
+                        AgingAlgorithm envejecimiento = new AgingAlgorithm(references.getReferences(), ages.getAges());
+                        TableController controller = new TableController(file,pageFrames,tablePages,ages,references,envejecimiento);
+
+                        envejecimiento.start();
+                        controller.start();
+                        
+                        envejecimiento.join();
+                        controller.join();
+                        break;
+
                     } catch (Exception e) {
                         System.out.println("Error, el valor ingresado no es válido.\n");
                         continue;
                     }
-                    break;
                 case 3:
-                    try 
-                    {
-                        TableController thread1= new TableController(); 
-                        AgingAlgorithm thread2= new AgingAlgorithm(2); 
-                        //Ejecutar de forma concurrente
-                        thread1.start();
-                        thread2.start();
-                        //Esperar la terminación de ambos threads
-                        //thread1.join();
-                        //thread2.join();
-
-                    } catch (Exception e) {
-                        System.out.println("Error \n");
-                    }
-                case 4:
                     scanner.close();
                     System.exit(0);
                     break;
