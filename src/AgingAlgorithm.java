@@ -1,9 +1,8 @@
 import java.util.ArrayList;
 
 //Thread encargado de ejecutar el algoritmo de envejecimiento cada 1 milisegundo.
-
 public class AgingAlgorithm extends Thread{
-    private int numReferences; //REVISAR SI ATRIBUTO ACA O EN REFERENCES.JAVA
+    private int numReferences; 
     private ArrayList<String> references;
     private ArrayList<String> ages;
     private boolean estaActivo;
@@ -24,11 +23,11 @@ public class AgingAlgorithm extends Thread{
         this.numReferences++;
     }
     
-    public synchronized void aging() //cada página lo llama
+    public synchronized void aging() //Cada página lo llama
     {
         if(numReferences>0) //Si página fue referenciada, envejecer
         {
-            for(int i=0;i<this.ages.size();i++) //para c/u pags
+            for(int i=0;i<this.ages.size();i++) //Para c/u pags
             {
                 String bitReferencia = references.get(i);
                 String edad = this.ages.get(i);//0x30
@@ -43,7 +42,7 @@ public class AgingAlgorithm extends Thread{
                 //actualizar edad
                 this.ages.set(i, bitReferencia+edad); // 1/0 + 0x29
             }
-            numReferences=0;//reset de referencias ya que se actualizaron todas las páginas
+            numReferences=0;//Reset de referencias ya que se actualizaron todas las páginas
         }
 
     }
@@ -54,7 +53,7 @@ public class AgingAlgorithm extends Thread{
         {
             //Llamar método algoritmo
             aging();
-            //simular pulso de reloj
+            //Simular pulso de reloj
             try {
                 sleep(1); 
             } catch (Exception e) 

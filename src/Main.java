@@ -58,13 +58,13 @@ public class Main {
                         System.out.print("Ingrese el nombre del archivo de referencias (references.txt): ");
                         String file = scanner.next();
                         System.out.println("\nSimulación en proceso...");
-                        
+            
                         //Crear estructuras necesarias
                         AgesList ages = new AgesList(pageFrames);//Asignar edades en 0´s
                         References references = new References(pageFrames);//Asignar bit referencia en 0
                         TablaPaginas tablePages = new TablaPaginas(pageFrames);
 
-                        // Poner el método para simular el comportamiento y calcular las fallas
+                        //Poner el método para simular el comportamiento y calcular las fallas
                         AgingAlgorithm envejecimiento = new AgingAlgorithm(references.getReferences(), ages.getAges());
                         TableController controller = new TableController(file,pageFrames,tablePages,ages,references,envejecimiento);
 

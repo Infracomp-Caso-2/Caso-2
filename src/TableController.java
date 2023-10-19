@@ -48,14 +48,6 @@ public class TableController extends Thread {
                         contadorLineas++;
                         continue;
                     } 
-                    //DEFINIR LAS ESTUCTURAS BASADAS EN EL # DE PAGINAS 
-                    /*     
-                    else if (contadorLineas == 5) {
-                        Integer totalPages = Integer.valueOf(line.split("=")[1]);
-                        //Crear TP y AgesList si es que se definen con # de paginas
-                        contadorLineas++;
-                    } 
-                    */
                     else {
                         Integer actualPage = Integer.valueOf(line.split(",")[1]);
                         Integer indexActualPage = tablePages.getIndexPagina(actualPage);
@@ -76,7 +68,7 @@ public class TableController extends Thread {
                             }
                             else //NO hay espacio en TP
                             {
-                                //Buscar indice de la página de mayor edad y reemplazar en TP
+                                //Buscar índice de la página de mayor edad y reemplazar en TP
                                 Integer indexOld = ages.getOlder();
                                 tablePages.setPagina(indexOld, actualPage);
                                 references.addReference(indexOld); 
@@ -86,8 +78,7 @@ public class TableController extends Thread {
                         }
                         contadorLineas++;
                     }
-                    //contadorLineas++; en vez de 3 veces
-                    
+                    //ContadorLineas++; en vez de 3 veces
                     //Pulso de reloj de 2 ms
                     try{
                         Thread.sleep(2);
@@ -99,7 +90,7 @@ public class TableController extends Thread {
                 scanner.close();
                 System.out.println("\nNombre archivo: "+file+"\nNumero de marcos: "+numMarcos
                 +"\nSe obtuvieron "+numFallos+" fallos de pagina." );
-                desactivar(); //acabar thread
+                desactivar(); //Acabar thread
                 agingAlgorithm.finish();
 
                 

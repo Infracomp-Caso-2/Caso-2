@@ -30,6 +30,6 @@ public class AgesList {
 				min = numAge;
 			}
 		}
-		return older; //indice del más viejo
+		return older; //Índice del más viejo
 	}
 }

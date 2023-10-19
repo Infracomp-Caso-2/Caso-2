@@ -1,8 +1,6 @@
-
-//Clase para representar la tabla de paginas
-
 import java.util.ArrayList;
 
+//Clase para representar la tabla de paginas
 public class TablaPaginas {
 
     private ArrayList<Integer> paginas = new ArrayList<Integer>();
